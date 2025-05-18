@@ -10,11 +10,13 @@ import adminRoutes from './api/admin/admin.routes';
 import productRoutes from './api/store/routes/product.routes';
 import { errorHandler } from './middlewares/errorHandler';
 import { notFound } from './middlewares/notFound';
+import { setupSwagger } from './docs/swagger';
 
 // ✅ Ensure all models are registered before routes
 import './api/store/models/category.model';
 
 const app = express();
+setupSwagger(app);
 
 // Global middlewares
 app.use(cors({ origin: config.CLIENT_URL, credentials: true }));
