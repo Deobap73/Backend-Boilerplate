@@ -1,18 +1,20 @@
 // backend-boilerplate/src/api/auth/auth.controller.ts
 import { Request, Response } from 'express';
 import User from './user.model';
-import jwt from 'jsonwebtoken';
-import { config } from '../../config/env';
 import { generateTwoFactorSecret, verifyTwoFactorToken } from './twoFactor.service';
+import { issueTokens } from '../../utils/issueTokens';
 
-export const register = async (req: Request, res: Response): Promise<void> => {
-  const { email, password } = req.body;
+export const register = async (req: Request, res: Response) => {
   try {
-    const user = new User({ email, password });
-    await user.save();
-    res.status(201).json({ message: 'User registered' });
+    const { email, password } = req.body;
+    const existing = await User.findOne({ email });
+    if (existing) {
+      return res.status(400).json({ message: 'Email already in use' });
+    }
+    const user = await User.create({ email, password });
+    res.status(201).json({ user, message: 'User registered' });
   } catch (err) {
-    res.status(500).json({ error: 'Registration failed' });
+    res.status(500).json({ message: 'Registration failed' });
   }
 };
 
@@ -32,10 +34,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       }
     }
 
-    const accessToken = jwt.sign({ userId: user._id }, config.JWT_SECRET, { expiresIn: '15m' });
-    const refreshToken = jwt.sign({ userId: user._id }, config.JWT_REFRESH_SECRET, {
-      expiresIn: '7d',
-    });
+    const { accessToken, refreshToken } = issueTokens(user._id as string);
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
@@ -44,7 +43,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.json({ accessToken });
+    res.json({ accessToken, refreshToken });
   } catch (err) {
     res.status(500).json({ error: 'Login failed' });
   }
