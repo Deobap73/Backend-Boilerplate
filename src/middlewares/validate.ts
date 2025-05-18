@@ -1,8 +1,6 @@
 // backend-boilerplate/src/middlewares/validate.ts
 import { Request, Response, NextFunction } from 'express';
-import validator from 'express-validator';
-
-const { validationResult } = validator;
+import { validationResult } from 'express-validator';
 
 export const validate = (req: Request, res: Response, next: NextFunction): void => {
   const errors = validationResult(req);

@@ -32,12 +32,15 @@ export const createProduct = async (req: MulterRequest, res: Response): Promise<
     const product = await Product.create({ ...req.body, image: imageUrl });
     res.status(201).json(product);
   } catch (err) {
+    console.error('❌ Error in createProduct:', err);
     res.status(500).json({ message: 'Failed to create product' });
   }
 };
 
 export const getProducts = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log('🔥 Inside getProducts');
+
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
@@ -58,6 +61,7 @@ export const getProducts = async (req: Request, res: Response): Promise<void> =>
 
     res.json({ products, totalCount, totalPages, currentPage: page });
   } catch (err) {
+    console.error('❌ Error in getProducts:', err);
     res.status(500).json({ message: 'Failed to fetch products' });
   }
 };
@@ -71,6 +75,7 @@ export const getProductById = async (req: Request, res: Response): Promise<void>
     }
     res.json(product);
   } catch (err) {
+    console.error('❌ Error in getProductById:', err);
     res.status(500).json({ message: 'Failed to fetch product' });
   }
 };
@@ -84,6 +89,7 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
     }
     res.json(product);
   } catch (err) {
+    console.error('❌ Error in updateProduct:', err);
     res.status(500).json({ message: 'Failed to update product' });
   }
 };
@@ -97,6 +103,7 @@ export const deleteProduct = async (req: Request, res: Response): Promise<void> 
     }
     res.json({ message: 'Product deleted' });
   } catch (err) {
+    console.error('❌ Error in deleteProduct:', err);
     res.status(500).json({ message: 'Failed to delete product' });
   }
 };

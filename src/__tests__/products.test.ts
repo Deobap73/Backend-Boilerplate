@@ -1,6 +1,16 @@
 // backend-boilerplate/src/__tests__/products.test.ts
 import request from 'supertest';
-import app from '../server'; // certifique-se que exporta a instância app no server.ts
+import app from '../app';
+import mongoose from 'mongoose';
+import { connectToDB } from '../config/db';
+
+beforeAll(async () => {
+  await connectToDB();
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
+});
 
 describe('GET /api/products', () => {
   it('should return 200 and an array of products', async () => {

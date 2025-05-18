@@ -5,9 +5,13 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import { config } from './config/env';
-import { connectToDB } from './config/db';
 import authRoutes from './api/auth/auth.routes';
+import productRoutes from './api/store/routes/product.routes';
 import { errorHandler } from './middlewares/errorHandler';
+import { notFound } from './middlewares/notFound';
+
+// ✅ Ensure all models are registered before routes
+import './api/store/models/category.model';
 
 const app = express();
 
@@ -20,11 +24,12 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
 
-// Error middleware
+// Error handlers
+app.use(notFound);
 app.use(errorHandler);
 
-// Connect DB
-connectToDB();
+console.log('✅ App file executed');
 
 export default app;

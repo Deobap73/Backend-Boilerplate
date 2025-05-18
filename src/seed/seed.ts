@@ -40,6 +40,7 @@ async function seed() {
       price: 29.99,
       stock: 100,
       category: categories[1]._id,
+      image: 'https://example.com/mouse.jpg',
     },
     {
       name: 'Cotton T-Shirt',
@@ -47,6 +48,7 @@ async function seed() {
       price: 14.99,
       stock: 200,
       category: categories[2]._id,
+      image: 'https://example.com/shirt.jpg',
     },
     {
       name: 'Classic Novel',
@@ -54,6 +56,7 @@ async function seed() {
       price: 9.99,
       stock: 150,
       category: categories[0]._id,
+      image: 'https://example.com/book.jpg',
     },
   ]);
 

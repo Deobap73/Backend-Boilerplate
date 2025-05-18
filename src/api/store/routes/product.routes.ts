@@ -28,5 +28,5 @@ router.post(
 );
 router.put('/:id', protect, requireRole('admin'), updateProductValidator, validate, updateProduct);
 router.delete('/:id', protect, requireRole('admin'), deleteProduct);
-
+console.log('✅ Product routes mounted');
 export default router;
