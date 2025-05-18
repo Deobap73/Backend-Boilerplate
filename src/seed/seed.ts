@@ -1,7 +1,7 @@
 // backend-boilerplate/src/seed/seed.ts
 import mongoose from 'mongoose';
-import User from '../api/auth/user.model';
-import Role from '../api/auth/role.model';
+import User from '../api/user/models/user.model';
+import Role from '../api/user/models/role.model';
 import Category from '../api/store/models/category.model';
 import Product from '../api/store/models/product.model';
 import { config } from '../config/env';

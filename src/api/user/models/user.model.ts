@@ -1,7 +1,7 @@
 // backend-boilerplate/src/api/user/models/user.model.ts
 import mongoose, { Schema, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
-import { IRole } from '../../auth/role.model';
+import { IRole } from './role.model';
 
 export interface IUser extends Document {
   email: string;

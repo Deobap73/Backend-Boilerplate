@@ -1,7 +1,7 @@
 // backend-boilerplate/src/scripts/seedRoles.ts
 import mongoose from 'mongoose';
 import { config } from '../config/env';
-import Role from '../api/auth/role.model';
+import Role from '../api/user/models/role.model';
 
 const seedRoles = async () => {
   await mongoose.connect(config.MONGO_URI);

@@ -1,9 +1,9 @@
 // backend-boilerplate/src/api/admin/admin.controller.ts
 import { Request, Response } from 'express';
-import User from '../auth/user.model';
+import User from '../user/models/user.model';
 import Product from '../store/models/product.model';
 import Category from '../store/models/category.model';
-import Role from '../auth/role.model';
+import Role from '../user/models/role.model';
 import Order from '../store/models/order.model';
 
 export const getDashboardStats = async (_req: Request, res: Response): Promise<void> => {

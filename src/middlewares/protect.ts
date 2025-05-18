@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import User from '../api/auth/user.model';
+import User from '../api/user/models/user.model';
 import { config } from '../config/env';
 
 export const protect = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

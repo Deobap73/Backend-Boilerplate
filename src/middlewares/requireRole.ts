@@ -1,6 +1,6 @@
 // backend-boilerplate/src/middlewares/requireRole.ts
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { IRole } from '../api/auth/role.model';
+import { IRole } from '../api/user/models/role.model';
 
 export const requireRole = (requiredRole: string): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction): void => {

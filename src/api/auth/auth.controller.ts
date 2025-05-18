@@ -1,6 +1,6 @@
 // backend-boilerplate/src/api/auth/auth.controller.ts
 import { Request, Response } from 'express';
-import User from './user.model';
+import User from '../user/models/user.model';
 import { generateTwoFactorSecret, verifyTwoFactorToken } from './twoFactor.service';
 import { issueTokens } from '../../utils/issueTokens';
 
