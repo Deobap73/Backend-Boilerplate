@@ -41,7 +41,7 @@ backend-boilerplate/
 ### 1. Clone this project
 
 ```bash
-git clone https://github.com/your-username/backend-boilerplate.git
+git clone git@github.com:Deobap73/Backend-Boilerplate.git
 cd backend-boilerplate
 ```
 
