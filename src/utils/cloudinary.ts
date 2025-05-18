@@ -1,6 +1,6 @@
-// backend-boilerplate/src/config/cloudinary.ts
+// src/shared/utils/cloudinary.ts
 import { v2 as cloudinary } from 'cloudinary';
-import { config } from './env';
+import { config } from '../config/env';
 
 cloudinary.config({
   cloud_name: config.CLOUDINARY_CLOUD_NAME,

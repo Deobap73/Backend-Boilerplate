@@ -1,5 +1,3 @@
-// README.md
-
 # Backend Boilerplate (Node.js + Express + TypeScript)
 
 A general-purpose, scalable, and secure backend starter built with **Node.js**, **Express**, and **TypeScript**. Designed to be used as a base for multiple applications by duplicating and customizing the modules you need.
@@ -13,7 +11,17 @@ A general-purpose, scalable, and secure backend starter built with **Node.js**, 
 - ✅ MongoDB with Mongoose ODM
 - ✅ JWT-based Authentication with Refresh Token
 - ✅ Cookie-based token storage (secure, httpOnly)
+- ✅ RBAC (Role-based Access Control)
+- ✅ 2FA (Two-Factor Authentication with TOTP)
+- ✅ User management (admin protected)
+- ✅ Category & Product management (CRUD)
+- ✅ Order system with admin tracking and status updates
+- ✅ Notification system (in-app)
+- ✅ Internal messaging system (user ↔ user)
+- ✅ Bookmarks system (posts/products)
+- ✅ Upload and delete images via Cloudinary
 - ✅ Middleware system (CORS, Helmet, Error Handling, Logging)
+- ✅ Multer integration for file uploads
 - ✅ Relative path imports only
 
 ---
@@ -23,15 +31,17 @@ A general-purpose, scalable, and secure backend starter built with **Node.js**, 
 ```
 backend-boilerplate/
 ├── src/
-│   ├── api/           # Feature modules (auth, user, etc.)
-│   ├── config/        # Database and environment config
-│   ├── middlewares/   # Global middleware handlers
-│   ├── app.ts         # App instance configuration
-│   └── server.ts      # Entry point
-├── .env.example       # Environment variable template
-├── tsconfig.json      # TypeScript configuration
-├── package.json       # Project metadata
-└── README.md          # Project documentation
+│   ├── api/              # Feature modules (auth, user, product, order, etc.)
+│   ├── config/           # Database and environment config
+│   ├── middlewares/      # Global middleware handlers
+│   ├── shared/           # Reusable utilities (cloudinary, helpers, etc.)
+│   ├── types/            # Custom TS types (ex: AuthRequest)
+│   ├── app.ts            # App instance configuration
+│   └── server.ts         # Entry point
+├── .env.example          # Environment variable template
+├── tsconfig.json         # TypeScript configuration
+├── package.json          # Project metadata
+└── README.md             # Project documentation
 ```
 
 ---
@@ -76,31 +86,40 @@ Project will be running at: [http://localhost:5000](http://localhost:5000)
 
 ---
 
-## 📬 API Endpoints
+## 📬 API Modules (Fases 1–9)
 
-| Method | Route                | Description          |
-| ------ | -------------------- | -------------------- |
-| POST   | `/api/auth/register` | Register a new user  |
-| POST   | `/api/auth/login`    | Login and get tokens |
+| Module        | Description                                  |
+| ------------- | -------------------------------------------- |
+| Auth          | Register, login, logout, refresh, 2FA        |
+| Users         | Admin-only user listing, deletion, role edit |
+| Roles         | Admin-defined access roles                   |
+| Products      | Full CRUD with image support + pagination    |
+| Categories    | CRUD categories linked to products           |
+| Orders        | Cart checkout & admin status update          |
+| Notifications | In-app alerts (read, delete)                 |
+| Messages      | Private messages (send, read, threads)       |
+| Bookmarks     | Save posts/products to favorites             |
+| Media         | Upload & delete images via Cloudinary        |
 
 ---
 
 ## 🔒 Security Notes
 
-- All tokens are signed and stored securely
-- Refresh tokens use `httpOnly` secure cookies
-- Helmet is enabled by default
+- JWT & refresh token authentication
+- Secure cookies (`httpOnly`, `SameSite`, `Secure`)
+- Role-based access enforcement (`requireRole` middleware)
+- Helmet, CORS, rate limiting, CSRF (optional)
 
 ---
 
-## 📦 Planned Extensions
+## 📦 Roadmap
 
-- RBAC (Roles & Permissions)
-- 2FA (Two-Factor Authentication)
-- API Key support
-- Cloudinary integration
-- Docker Compose with Redis, Mongo
-- Swagger documentation
+- 🔄 OAuth Login (Google, GitHub)
+- 📊 Admin analytics dashboard
+- 🌍 Multi-language support
+- 🧾 Swagger documentation (OpenAPI)
+- 🐳 Docker Compose (Mongo + Redis)
+- 🧪 Full test coverage (Jest + Supertest)
 
 ---
 
