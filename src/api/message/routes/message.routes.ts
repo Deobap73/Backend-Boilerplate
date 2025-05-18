@@ -6,12 +6,14 @@ import {
   getMessagesWithUser,
   markMessageAsRead,
 } from '../controllers/message.controller';
+import { validate } from '../../../middlewares/validate';
+import { sendMessageValidator } from '../validators/message.validator';
 
 const router = Router();
 
 router.use(protect);
 
-router.post('/', sendMessage);
+router.post('/', sendMessageValidator, validate, sendMessage);
 router.get('/', getMessagesWithUser);
 router.patch('/:id/read', markMessageAsRead);
 
